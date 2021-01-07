@@ -5,7 +5,10 @@
     "permissions": [
         "activeTab",
         "declarativeContent",
-        "storage"
+        "storage",
+        "tabs",
+        "http://*/",
+        "https://*/"
     ],
     "background": {
         "scripts": [

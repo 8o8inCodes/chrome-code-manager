@@ -11,8 +11,8 @@ changeColor.onclick = function(element) {
       chrome.tabs.executeScript(
           tabs[0].id,
           {
-              code: 'console.log("lol");'
-            //   code: 'document.querySelector("button.tw-button--success").click();'
+            //   code: 'console.log("lol");'
+              code: 'document.querySelector("button.tw-button--success").click();'
             }
         );
     });

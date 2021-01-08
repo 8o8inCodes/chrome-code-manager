@@ -35,15 +35,18 @@ const App = () =>{
   const onSelect = script => {
     // TODO: check if script is edited, if it is, prompt to save the changes
     // then set selected script
+    console.log("on select")
   }
 
   const onSave = script => {
     // check if scripts already containing a script with the same ID, if it does, override it,
     // otherwise push it. And set "new" attribute to false. and update the chrome store
+    console.log("on Save")
   }
 
   const onToggle = script => {
     // Toggle enabled and update the chrome store
+    console.log("on Toggle")
   }
 
   return (

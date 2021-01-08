@@ -21,8 +21,8 @@ const ScriptsSidebar = ({ scripts, onSelect, onToggle, loading }) => {
 
 const ScriptButton = ({ script, onSelect, onToggle }) => {
     return (
-        <div className={scriptButtonContainer} onClick={() => onSelect(script)}>
-            <label>{script.name}</label>
+        <div className={scriptButtonContainer}>
+            <button style={{ width: "100%" }} onClick={() => onSelect(script)}>{script.name}</button>
             <button onClick={() => onToggle(script)}>{script.enabled ? "O" : "X"}</button>
         </div>
     );

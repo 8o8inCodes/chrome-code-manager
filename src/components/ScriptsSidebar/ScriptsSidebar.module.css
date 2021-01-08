@@ -1,0 +1,10 @@
+.container {
+    width: 200px;
+    background:grey;
+}
+
+.scriptButtonContainer {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+}

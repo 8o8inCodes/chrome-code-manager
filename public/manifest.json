@@ -31,6 +31,6 @@
         "48": "images/get_started48.png",
         "128": "images/get_started128.png"
     },
-    "content_security_policy": "script-src 'self' 'sha256-aiTCej56IR640CN++qOoP5HtiJlWlKhUOqwYWIkmsOE='; object-src 'self'",
+    "content_security_policy": "script-src 'self' 'sha256-MwP4HbeUCVrFCQPoSz/4XRNAG+RfS2Y1COf0NYBQKY0='; object-src 'self'",
     "manifest_version": 2
 }

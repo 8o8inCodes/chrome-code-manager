@@ -1,16 +1,39 @@
 import {app} from './App.module.css';
 import {useState, useEffect} from 'react';
+import ScriptsSidebar from './components/ScriptsSidebar'
+import CodeEditor from './components/CodeEditor'
 
-const app = () =>{
+const mockScript = [
+  {
+    name: "test-script",
+    description: "should be deleted",
+    urlMatch: "*",
+    enabled: false,
+    code: `console.log("test script")`,
+    id: "abc897987"
+  },
+  {
+    name: "test-script-2",
+    description: "should be deleted",
+    urlMatch: "*",
+    enabled: false,
+    code: `console.log("test script 2")`,
+    id: "abc89798731"
+  }
+]
+
+const App = () =>{
   const [scripts, setScripts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedScript, setSelectedScript] = useState({new: true});
   useEffect(()=>{
     // Load the scripts from the chrome store
+    setScripts(mockScript)
+    setLoading(false)
   }, [])
 
   const onSelect = script => {
-    // check if script is edited, if it is, prompt to save the changes
+    // TODO: check if script is edited, if it is, prompt to save the changes
     // then set selected script
   }
 
@@ -19,14 +42,14 @@ const app = () =>{
     // otherwise push it. And set "new" attribute to false. and update the chrome store
   }
 
-  const onEnable = script => {
-    // set enabled to true and update the chrome store
+  const onToggle = script => {
+    // Toggle enabled and update the chrome store
   }
 
   return (
     <div className={app}>
-      <ScriptsSidebar scripts={scripts} onSelect={onSelect} onEnable={onEnable} loading={loading} />
-      <CodeEditor onSave={onSave} selectedScript={selectedScript}/>
+      <ScriptsSidebar scripts={scripts} onSelect={onSelect} onToggle={onToggle} loading={loading} />
+      <CodeEditor onSave={onSave} script={selectedScript}/>
     </div>
   );
 }

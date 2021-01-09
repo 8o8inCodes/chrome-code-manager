@@ -3,6 +3,11 @@ import { container, editor, metadataContainer } from './CodeEditor.module.css';
 
 const ScriptsSidebar = ({ script, onSave }) => {
     const [code, setCode] = useState("")
+
+    useEffect(() => {
+        setCode(script.code)
+    }, [script])
+
     const onSaveClick = (name, description, urlMatch) => {
         onSave({
             ...script,

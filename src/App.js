@@ -1,3 +1,4 @@
+/*global chrome*/
 import {app} from './App.module.css';
 import {useState, useEffect} from 'react';
 import ScriptsSidebar from './components/ScriptsSidebar'
@@ -29,8 +30,15 @@ const App = () =>{
   const [selectedScript, setSelectedScript] = useState({new: true});
   useEffect(()=>{
     // Load the scripts from the chrome store
-    setScripts(mockScript)
-    setLoading(false)
+    if(chrome.storage){
+      chrome.storage.sync.get((data)=>{
+        setScripts(data["scripts"] || [])
+        setLoading(false)
+      })
+    } else {
+      console.log("Extension chrome storage isn't available.")
+    }
+
   }, [])
 
   const onSelect = script => {
@@ -44,24 +52,40 @@ const App = () =>{
     // check if scripts already containing a script with the same ID, if it does, override it,
     // otherwise push it. And set "new" attribute to false. and update the chrome store
     console.log("on Save")
+    let updatedScripts = []
     if(!script.new){
       const scriptIndex = scripts.findIndex(s => s.id === script.id)
-      setScripts([
+      updatedScripts =[
         ...scripts.slice(0, scriptIndex),
         script,
         ...scripts.slice(scriptIndex+1, scripts.length)
-      ])
+      ]
     } else {
-      setScripts([
+      updatedScripts = [
         {
           ...script,
           new: false,
           id: nanoid()
         },
         ...scripts
-      ])
+      ]
     }
-
+    if(chrome.storage){
+      chrome.storage.sync.get((data)=>{
+        const updatedStorage = {
+          ...data,
+          scripts: updatedScripts
+        }
+        chrome.storage.sync.set(updatedStorage, function() {
+          console.log('Storage updated.');
+        });
+      })
+      
+    } else {
+      console.warn("Cannot save to the persistance storage since the extension isn't running as an extension.")
+    }
+    setScripts(updatedScripts)
+    
   }
 
   const onToggle = script => {

@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react';
-import { container, editor, metadataContainer } from './CodeEditor.module.css';
+import { container, editor, metadataContainer, buttonsContainer, button } from './CodeEditor.module.css';
 
-const ScriptsSidebar = ({ script, onSave }) => {
+const ScriptsSidebar = ({ script, onSave, onDelete }) => {
     const [code, setCode] = useState("")
 
     useEffect(() => {
@@ -24,12 +24,12 @@ const ScriptsSidebar = ({ script, onSave }) => {
     return (
         <div className={container}>
             <textarea className={editor} value={code} onChange={e => setCode(e.target.value)}></textarea>
-            <Metadata script={script} onSave={onSaveClick}/>
+            <Metadata script={script} onSave={onSaveClick} onDelete={onDelete}/>
         </div>
     );
 };
 
-const Metadata = ({script, onSave}) => {
+const Metadata = ({script, onSave, onDelete}) => {
     const [name, setName] = useState("")
     const [description, setDescription] = useState("")
     const [urlMatch, setUrlMatch] = useState("")
@@ -51,7 +51,10 @@ const Metadata = ({script, onSave}) => {
             <input type="text" placeholder="Description" value={description} onChange={e=>setDescription(e.target.value)}></input>
             <input type="text" placeholder="Url Matches" value={urlMatch} onChange={e=>setUrlMatch(e.target.value)}></input>
             <input type="text" placeholder="Interval (coming soon)" disabled></input>
-            <button onClick={() => onSave(name, description, urlMatch)}>Save</button>
+            <div className={buttonsContainer}>
+                <button className={button} disabled={script.new} onClick={() => onDelete(script)}>Delete</button>
+                <button className={button} onClick={() => onSave(name, description, urlMatch)}>Save</button>
+            </div>
         </div>
     );
 };

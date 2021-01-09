@@ -13,3 +13,12 @@
     display: flex;
     flex-direction: column;
 }
+
+.buttonsContainer {
+    display: flex;
+}
+
+.button {
+    display: block;
+    width: 100%;
+}

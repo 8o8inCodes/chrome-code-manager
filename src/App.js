@@ -70,22 +70,35 @@ const App = () =>{
         ...scripts
       ]
     }
-    if(chrome.storage){
-      chrome.storage.sync.get((data)=>{
+    updateScripts(updatedScripts, setScripts);
+  }
+
+  const onDelete = script => {
+    const scriptIndex = scripts.findIndex(s => s.id === script.id)
+    const updatedScripts =[
+      ...scripts.slice(0, scriptIndex),
+      ...scripts.slice(scriptIndex+1, scripts.length)
+    ]
+
+    updateScripts(updatedScripts)
+  }
+
+  const updateScripts = updatedScripts => {
+    if (chrome.storage) {
+      chrome.storage.sync.get((data) => {
         const updatedStorage = {
           ...data,
           scripts: updatedScripts
-        }
-        chrome.storage.sync.set(updatedStorage, function() {
+        };
+        chrome.storage.sync.set(updatedStorage, function () {
           console.log('Storage updated.');
         });
-      })
-      
+      });
+  
     } else {
-      console.warn("Cannot save to the persistance storage since the extension isn't running as an extension.")
+      console.warn("Cannot save to the persistance storage since the extension isn't running as an extension.");
     }
-    setScripts(updatedScripts)
-    
+    setScripts(updatedScripts);
   }
 
   const onToggle = script => {
@@ -101,9 +114,11 @@ const App = () =>{
   return (
     <div className={app}>
       <ScriptsSidebar scripts={scripts} onSelect={onSelect} onToggle={onToggle} loading={loading} />
-      <CodeEditor onSave={onSave} script={selectedScript}/>
+      <CodeEditor onSave={onSave} onDelete={onDelete} script={selectedScript}/>
     </div>
   );
 }
 
 export default App;
+
+

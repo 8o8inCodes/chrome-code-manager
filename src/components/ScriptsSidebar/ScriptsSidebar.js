@@ -5,6 +5,16 @@ const ScriptsSidebar = ({ scripts, onSelect, onToggle, loading }) => {
     if (loading) return <div className={container}>Loading...</div>;
     return (
         <div className={container}>
+            <CreateScriptButton
+                script={{
+                    name: "Create New",
+                    new: true,
+                    enabled: false,
+                    id: 0,
+                }}
+                onSelect={onSelect}
+            />
+
             {
                 scripts.map(script =>
                     <ScriptButton
@@ -24,6 +34,14 @@ const ScriptButton = ({ script, onSelect, onToggle }) => {
         <div className={scriptButtonContainer}>
             <button style={{ width: "100%" }} onClick={() => onSelect(script)}>{script.name}</button>
             <button onClick={() => onToggle(script)}>{script.enabled ? "O" : "X"}</button>
+        </div>
+    );
+};
+
+const CreateScriptButton = ({ script, onSelect }) => {
+    return (
+        <div className={scriptButtonContainer}>
+            <button style={{ width: "100%" }} onClick={() => onSelect(script)}>{script.name}</button>
         </div>
     );
 };

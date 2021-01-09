@@ -5,7 +5,11 @@ const ScriptsSidebar = ({ script, onSave }) => {
     const [code, setCode] = useState("")
 
     useEffect(() => {
-        setCode(script.code)
+        if(script.new){
+            setCode('console.log("New Script")')
+        } else {
+            setCode(script.code)
+        }
     }, [script])
 
     const onSaveClick = (name, description, urlMatch) => {
@@ -34,6 +38,10 @@ const Metadata = ({script, onSave}) => {
             setName(script.name)
             setDescription(script.description)
             setUrlMatch(script.urlMatch)
+        } else {
+            setName("")
+            setDescription("")
+            setUrlMatch("")
         }
     }, [script])
 

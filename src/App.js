@@ -2,6 +2,7 @@ import {app} from './App.module.css';
 import {useState, useEffect} from 'react';
 import ScriptsSidebar from './components/ScriptsSidebar'
 import CodeEditor from './components/CodeEditor'
+import {nanoid} from 'nanoid'
 
 const mockScript = [
   {
@@ -35,7 +36,7 @@ const App = () =>{
   const onSelect = script => {
     // TODO: check if script is edited, if it is, prompt to save the changes
     // then set selected script
-    console.log("on select")
+    console.log("on select", script)
     setSelectedScript(script);
   }
 
@@ -43,12 +44,23 @@ const App = () =>{
     // check if scripts already containing a script with the same ID, if it does, override it,
     // otherwise push it. And set "new" attribute to false. and update the chrome store
     console.log("on Save")
-    const scriptIndex = scripts.findIndex(s => s.id === script.id)
-    setScripts([
-      ...scripts.slice(0, scriptIndex),
-      script,
-      ...scripts.slice(scriptIndex+1, scripts.length)
-    ])
+    if(!script.new){
+      const scriptIndex = scripts.findIndex(s => s.id === script.id)
+      setScripts([
+        ...scripts.slice(0, scriptIndex),
+        script,
+        ...scripts.slice(scriptIndex+1, scripts.length)
+      ])
+    } else {
+      setScripts([
+        {
+          ...script,
+          new: false,
+          id: nanoid()
+        },
+        ...scripts
+      ])
+    }
 
   }
 

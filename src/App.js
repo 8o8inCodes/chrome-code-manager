@@ -75,6 +75,7 @@ const App = () =>{
 
   const onDelete = script => {
     const scriptIndex = scripts.findIndex(s => s.id === script.id)
+    if(scriptIndex < 0) return;
     const updatedScripts =[
       ...scripts.slice(0, scriptIndex),
       ...scripts.slice(scriptIndex+1, scripts.length)

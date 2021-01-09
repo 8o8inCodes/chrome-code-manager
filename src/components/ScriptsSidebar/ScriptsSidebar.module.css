@@ -1,6 +1,7 @@
 .container {
     width: 200px;
     background:grey;
+    overflow-y: scroll;
 }
 
 .scriptButtonContainer {

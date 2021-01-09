@@ -20,7 +20,168 @@ const mockScript = [
     urlMatch: "*",
     enabled: false,
     code: `console.log("test script 2")`,
-    id: "abc89798731"
+    id: "abc8dfgfdgdfgs9798731"
+  },
+  {
+    name: "test-script-2",
+    description: "should be deleted",
+    urlMatch: "*",
+    enabled: false,
+    code: `console.log("test script 2")`,
+    id: "agfhgfhkjbc89798731"
+  },
+  {
+    name: "test-script-2",
+    description: "should be deleted",
+    urlMatch: "*",
+    enabled: false,
+    code: `console.log("test script 2")`,
+    id: "dfgdfgvbabc89798731"
+  }
+  ,
+  {
+    name: "test-script-2",
+    description: "should be deleted",
+    urlMatch: "*",
+    enabled: false,
+    code: `console.log("test script 2")`,
+    id: "aertertbc89798731"
+  }
+  ,
+  {
+    name: "test-script-2",
+    description: "should be deleted",
+    urlMatch: "*",
+    enabled: false,
+    code: `console.log("test script 2")`,
+    id: "abc897dcxgrferrt98731"
+  }
+  ,
+  {
+    name: "test-script-2",
+    description: "should be deleted",
+    urlMatch: "*",
+    enabled: false,
+    code: `console.log("test script 2")`,
+    id: "abc897vcdfgty98731"
+  },
+  {
+    name: "test-script",
+    description: "should be deleted",
+    urlMatch: "*",
+    enabled: false,
+    code: `console.log("test script")`,
+    id: "abc89truyugh7987"
+  },
+  {
+    name: "test-script-2",
+    description: "should be deleted",
+    urlMatch: "*",
+    enabled: false,
+    code: `console.log("test script 2")`,
+    id: "abc8979cvbsder8731"
+  },
+  {
+    name: "test-script-2",
+    description: "should be deleted",
+    urlMatch: "*",
+    enabled: false,
+    code: `console.log("test script 2")`,
+    id: "abc89798cvbtft731"
+  },
+  {
+    name: "test-script-2",
+    description: "should be deleted",
+    urlMatch: "*",
+    enabled: false,
+    code: `console.log("test script 2")`,
+    id: "abc8979fbvhgytr8731"
+  }
+  ,
+  {
+    name: "test-script-2",
+    description: "should be deleted",
+    urlMatch: "*",
+    enabled: false,
+    code: `console.log("test script 2")`,
+    id: "abc89rtyrtyrty798731"
+  }
+  ,
+  {
+    name: "test-script-2",
+    description: "should be deleted",
+    urlMatch: "*",
+    enabled: false,
+    code: `console.log("test script 2")`,
+    id: "abc89vbnvbn798731"
+  }
+  ,
+  {
+    name: "test-script-2",
+    description: "should be deleted",
+    urlMatch: "*",
+    enabled: false,
+    code: `console.log("test script 2")`,
+    id: "abc8jkhkhjk9798731"
+  },
+  {
+    name: "test-script",
+    description: "should be deleted",
+    urlMatch: "*",
+    enabled: false,
+    code: `console.log("test script")`,
+    id: "abc89dsfgdf7987"
+  },
+  {
+    name: "test-script-2",
+    description: "should be deleted",
+    urlMatch: "*",
+    enabled: false,
+    code: `console.log("test script 2")`,
+    id: "abc897fghfgh98731"
+  },
+  {
+    name: "test-script-2",
+    description: "should be deleted",
+    urlMatch: "*",
+    enabled: false,
+    code: `console.log("test script 2")`,
+    id: "abc89gfhfgh798731"
+  },
+  {
+    name: "test-script-2",
+    description: "should be deleted",
+    urlMatch: "*",
+    enabled: false,
+    code: `console.log("test script 2")`,
+    id: "abc8vcb9798731"
+  }
+  ,
+  {
+    name: "test-script-2",
+    description: "should be deleted",
+    urlMatch: "*",
+    enabled: false,
+    code: `console.log("test script 2")`,
+    id: "abc897ertib98731"
+  }
+  ,
+  {
+    name: "test-script-2",
+    description: "should be deleted",
+    urlMatch: "*",
+    enabled: false,
+    code: `console.log("test script 2")`,
+    id: "abc897erui98731"
+  }
+  ,
+  {
+    name: "test-script-2",
+    description: "should be deleted",
+    urlMatch: "*",
+    enabled: false,
+    code: `console.log("test script 2")`,
+    id: "abc8979dsftyr8731"
   }
 ]
 
@@ -36,6 +197,9 @@ const App = () =>{
         setLoading(false)
       })
     } else {
+      setScripts(mockScript)
+      setLoading(false)
+      
       console.log("Extension chrome storage isn't available.")
     }
 

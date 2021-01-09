@@ -1,8 +1,9 @@
 import {useState, useEffect} from 'react';
 import AceEditor from "react-ace";
-import { container, editor, metadataContainer, buttonsContainer, button } from './CodeEditor.module.css';
+import { container, metadataContainer, buttonsContainer, button } from './CodeEditor.module.css';
 import "ace-builds/src-noconflict/mode-java";
 import "ace-builds/src-noconflict/theme-monokai";
+
 
 const ScriptsSidebar = ({ script, onSave, onDelete }) => {
     const [code, setCode] = useState("")

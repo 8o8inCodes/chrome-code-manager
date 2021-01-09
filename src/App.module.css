@@ -1,6 +1,44 @@
 .app {
   text-align: center;
   width: 500px;
-  height: 500px;
+  height: 538px;
   display: flex;
+  background: #0e0e0e;
+}
+
+input {
+  background: #272822;
+  border: solid 1px #585858;
+  padding: 5px;
+  margin-top: 3px;
+  border-radius: 5px;
+  color: white;
+}
+button, .divButton {
+  background: #272822;
+  border: solid 1px #585858;
+  padding: 5px;
+  margin-top: 3px;
+  border-radius: 5px;
+  color: white;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #383838;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(20, 20, 20);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(47, 47, 47);
 }

@@ -8,6 +8,7 @@ chrome.tabs.onUpdated.addListener(function (tabId , info) {
           if(script.enabled){
             const reg = new RegExp(script.urlMatch)
             if(reg.test(url)){
+              console.log("Executing Script", script)
               chrome.tabs.executeScript(
                 tabs[0].id,
                 {

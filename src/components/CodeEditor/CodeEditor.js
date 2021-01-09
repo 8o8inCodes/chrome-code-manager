@@ -1,5 +1,8 @@
 import {useState, useEffect} from 'react';
+import AceEditor from "react-ace";
 import { container, editor, metadataContainer, buttonsContainer, button } from './CodeEditor.module.css';
+import "ace-builds/src-noconflict/mode-java";
+import "ace-builds/src-noconflict/theme-monokai";
 
 const ScriptsSidebar = ({ script, onSave, onDelete }) => {
     const [code, setCode] = useState("")
@@ -23,7 +26,27 @@ const ScriptsSidebar = ({ script, onSave, onDelete }) => {
     }
     return (
         <div className={container}>
-            <textarea className={editor} value={code} onChange={e => setCode(e.target.value)}></textarea>
+            <AceEditor
+                placeholder="Code"
+                mode="javascript"
+                theme="monokai"
+                onChange={setCode}
+                fontSize={14}
+                showPrintMargin={true}
+                showGutter={true}
+                highlightActiveLine={true}
+                value={code}
+                height="385px"
+                width="100%"
+                setOptions={{
+                    enableBasicAutocompletion: false,
+                    enableLiveAutocompletion: false,
+                    enableSnippets: false,
+                    showLineNumbers: true,
+                    tabSize: 2,
+                }}
+            />
+
             <Metadata script={script} onSave={onSaveClick} onDelete={onDelete}/>
         </div>
     );

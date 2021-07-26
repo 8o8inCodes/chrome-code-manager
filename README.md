@@ -1,9 +1,5 @@
 # chrome-code-manager
 
-This is still work in progres, I'd suggest not cloning this repo yet.
-
-## About
-
 This is a chrome react extention that will manage your Javascript code and inject them into specified webpages.
 
 ## Why?

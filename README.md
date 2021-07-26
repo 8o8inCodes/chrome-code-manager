@@ -14,6 +14,14 @@ For example:
 On www.twitch.tv while you watch a stream, after a few minutes, a button appears. You should press that button in order to claim reward points.
 So you could write a script that would press that button whenever it appears, and save it in the extension's script manager. In the configuration you can set the URL match and BAM! Every time you enter twitch, the script will execute automatically.
 
+### Requirements
+
+* Nodejs  
+https://nodejs.org/en/
+
+* Chrome  
+https://www.google.com/chrome/
+
 ## Setup
 
 * Install dependencies ```npm i```

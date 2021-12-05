@@ -1,6 +1,9 @@
 .container {
     width: 200px;
     overflow-y: scroll;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 .scriptButtonContainer {

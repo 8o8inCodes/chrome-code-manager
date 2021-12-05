@@ -8,11 +8,30 @@ chrome.tabs.onUpdated.addListener(function (tabId , info) {
           if(script.enabled){
             const reg = new RegExp(script.urlMatch)
             if(reg.test(url)){
-              console.log("Executing Script", script)
+              console.log("Executing Script", script);
+              const wrappedScript = `
+                const executeCode = () => {
+                  ${script.code}
+                }
+                const waitForElement = (selector) => {
+                  if (!selector || selector === 'undefined') {
+                    executeCode();
+                    return;
+                  }
+                  if (document.querySelector(selector)) {
+                    executeCode();
+                  } else {
+                    setTimeout(() => waitForElement(selector), 100);
+                  }
+                }
+                waitForElement('${script.waitForElement}');
+              `
+
+              console.log("Full script", wrappedScript)
               chrome.tabs.executeScript(
                 tabs[0].id,
                 {
-                  code: script.code
+                  code: wrappedScript
                 }
               );
             }

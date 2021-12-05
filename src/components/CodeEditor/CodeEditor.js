@@ -16,12 +16,13 @@ const ScriptsSidebar = ({ script, onSave, onDelete }) => {
         }
     }, [script])
 
-    const onSaveClick = (name, description, urlMatch) => {
+    const onSaveClick = (name, description, urlMatch, waitForElement) => {
         onSave({
             ...script,
             name,
             description,
-            urlMatch, 
+            urlMatch,
+            waitForElement,
             code
         })
     }
@@ -57,11 +58,13 @@ const Metadata = ({script, onSave, onDelete}) => {
     const [name, setName] = useState("")
     const [description, setDescription] = useState("")
     const [urlMatch, setUrlMatch] = useState("")
+    const [waitForElement, setWaitForElement] = useState("");
     useEffect(() => {
         if(!script.new){
             setName(script.name)
             setDescription(script.description)
             setUrlMatch(script.urlMatch)
+            setWaitForElement(script.waitForElement)
         } else {
             setName("")
             setDescription("")
@@ -74,10 +77,11 @@ const Metadata = ({script, onSave, onDelete}) => {
             <input type="text" placeholder="Name" value={name} onChange={e=>setName(e.target.value)}></input>
             <input type="text" placeholder="Description" value={description} onChange={e=>setDescription(e.target.value)}></input>
             <input type="text" placeholder="Url Matches" value={urlMatch} onChange={e=>setUrlMatch(e.target.value)}></input>
+            <input type="text" placeholder="Wait for Element" value={waitForElement} onChange={e=>setWaitForElement(e.target.value)}></input>
             <input type="text" placeholder="Interval (coming soon)" disabled></input>
             <div className={buttonsContainer}>
                 <button className={button} disabled={script.new} onClick={() => onDelete(script)}>Delete</button>
-                <button className={button} onClick={() => onSave(name, description, urlMatch)}>Save</button>
+                <button className={button} onClick={() => onSave(name, description, urlMatch, waitForElement)}>Save</button>
             </div>
         </div>
     );

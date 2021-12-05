@@ -1,11 +1,18 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { container, scriptButtonContainer, divButton } from './ScriptsSidebar.module.css';
 import {IoMdPower} from 'react-icons/io';
 
 const ScriptsSidebar = ({ scripts, onSelect, onToggle, loading }) => {
+    const [searchText, setSearchText] = useState("");
     if (loading) return <div className={container}>Loading...</div>;
     return (
         <div className={container}>
+            <input 
+                type="text" 
+                placeholder="Search" 
+                value={searchText}
+                onChange={(e) => setSearchText(e.target.value)}
+            />
             <CreateScriptButton
                 script={{
                     name: "Create New",
@@ -15,9 +22,8 @@ const ScriptsSidebar = ({ scripts, onSelect, onToggle, loading }) => {
                 }}
                 onSelect={onSelect}
             />
-
             {
-                scripts.map(script =>
+                scripts.filter(current => current.name.includes(searchText)).map(script =>
                     <ScriptButton
                         key={script.id}
                         script={script}

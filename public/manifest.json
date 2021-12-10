@@ -2,6 +2,7 @@
     "name": "Chrome Code Injector",
     "version": "1.0",
     "description": "Injects code into chrome",
+    "key": "gccohdloepoffcmaajpnljihfjaebmdn",
     "permissions": [
         "activeTab",
         "declarativeContent",

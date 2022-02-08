@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import { container, scriptButtonContainer, divButton } from './ScriptsSidebar.module.css';
+import s, { container, scriptButtonContainer, divButton } from './ScriptsSidebar.module.css';
 import {IoMdPower} from 'react-icons/io';
 
-const ScriptsSidebar = ({ scripts, onSelect, onToggle, loading }) => {
+const ScriptsSidebar = ({ scripts, onSelect, onToggle, loading, selectedScript }) => {
     const [searchText, setSearchText] = useState("");
     if (loading) return <div className={container}>Loading...</div>;
     return (
@@ -29,6 +29,7 @@ const ScriptsSidebar = ({ scripts, onSelect, onToggle, loading }) => {
                         script={script}
                         onSelect={onSelect}
                         onToggle={onToggle}
+                        selected={selectedScript && selectedScript.id === script.id}
                     />
                 )
             }
@@ -36,11 +37,11 @@ const ScriptsSidebar = ({ scripts, onSelect, onToggle, loading }) => {
     );
 };
 
-const ScriptButton = ({ script, onSelect, onToggle }) => {
+const ScriptButton = ({ script, onSelect, onToggle, selected }) => {
     return (
         <div className={scriptButtonContainer}>
-            <button style={{ width: "100%" }} onClick={() => onSelect(script)}>{script.name}</button>
-            <div className={divButton} onClick={() => onToggle(script)}><IoMdPower color={script.enabled ? "cyan" : "gray"}/></div>
+            <button className={`${selected ? s.selectedScript : ''}`} style={{ width: "100%" }} onClick={() => onSelect(script)}>{script.name}</button>
+            <div className={`${divButton} ${selected ? s.selectedScript : ''}`} onClick={() => onToggle(script)}><IoMdPower color={script.enabled ? "cyan" : "gray"}/></div>
         </div>
     );
 };

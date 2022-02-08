@@ -95,7 +95,7 @@ const App = () =>{
 
   return (
     <div className={app}>
-      <ScriptsSidebar scripts={scripts} onSelect={onSelect} onToggle={onToggle} loading={loading} />
+      <ScriptsSidebar scripts={scripts} onSelect={onSelect} onToggle={onToggle} loading={loading} selectedScript={selectedScript} />
       <CodeEditor onSave={onSave} onDelete={onDelete} script={selectedScript}/>
     </div>
   );

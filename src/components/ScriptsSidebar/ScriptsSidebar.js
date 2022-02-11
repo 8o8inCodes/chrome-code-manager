@@ -14,6 +14,8 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
 import Switch from "@mui/material/Switch";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
 
 const ScriptsSidebar = ({
 	scripts,
@@ -25,29 +27,31 @@ const ScriptsSidebar = ({
 	const [searchText, setSearchText] = useState("");
 	if (loading) return <div className={container}>Loading...</div>;
 	return (
-		<div className={container}>
-			<input
-				type="text"
-				placeholder="Search"
-				value={searchText}
-				onChange={(e) => setSearchText(e.target.value)}
-			/>
+		<Box sx={{ width: "316px" }}>
+			<Box component="div" sx={{ p: 2 }}>
+				<TextField
+					label="Search"
+					variant="filled"
+					size="small"
+					value={searchText}
+					onChange={(e) => setSearchText(e.target.value)}
+				/>
+			</Box>
 			<Box sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
+				<Button
+					variant="contained"
+					size="small"
+					onClick={() =>
+						onSelect({
+							new: true,
+							enabled: false,
+							id: 0,
+						})
+					}
+				>
+					Create Script
+				</Button>
 				<List>
-					<ListItem disablePadding>
-						<ListItemButton
-							dense
-							onClick={() =>
-								onSelect({
-									new: true,
-									enabled: false,
-									id: 0,
-								})
-							}
-						>
-							<ListItemText primary="Create Script" />
-						</ListItemButton>
-					</ListItem>
 					{scripts
 						.filter((current) => current.name.includes(searchText))
 						.map((script) => (
@@ -61,7 +65,7 @@ const ScriptsSidebar = ({
 						))}
 				</List>
 			</Box>
-		</div>
+		</Box>
 	);
 };
 

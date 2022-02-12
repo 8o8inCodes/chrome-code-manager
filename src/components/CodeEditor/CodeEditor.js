@@ -10,13 +10,36 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
+import Container from "@mui/material/Container";
 
 import "ace-builds/src-noconflict/mode-java";
 import "ace-builds/src-noconflict/theme-monokai";
 
 const ScriptsSidebar = ({ script, onSave, onDelete }) => {
 	const [code, setCode] = useState("");
+
 	const [metadataDrawerOpen, setMetadataDrawerOpen] = useState(false);
+	const [name, setName] = useState("");
+	const [description, setDescription] = useState("");
+	const [urlMatch, setUrlMatch] = useState("");
+	const [waitForElement, setWaitForElement] = useState("");
+	const [scriptInterval, setScriptInterval] = useState(null);
+
+	useEffect(() => {
+		if (!script.new) {
+			setName(script.name);
+			setDescription(script.description);
+			setUrlMatch(script.urlMatch);
+			setWaitForElement(script.waitForElement);
+			setScriptInterval(script.scriptInterval);
+		} else {
+			setName("");
+			setDescription("");
+			setUrlMatch("");
+			setWaitForElement("");
+			setScriptInterval(null);
+		}
+	}, [script]);
 
 	useEffect(() => {
 		if (script.new) {
@@ -65,90 +88,12 @@ const ScriptsSidebar = ({ script, onSave, onDelete }) => {
 					tabSize: 2,
 				}}
 			/>
-
-			<Button onClick={() => setMetadataDrawerOpen(true)}>Settings</Button>
-			<Drawer
-				anchor="bottom"
-				open={metadataDrawerOpen}
-				onClose={() => setMetadataDrawerOpen(false)}
-			>
-				<Metadata script={script} onSave={onSaveClick} onDelete={onDelete} />
-			</Drawer>
-		</Box>
-	);
-};
-
-const Metadata = ({ script, onSave, onDelete }) => {
-	const [name, setName] = useState("");
-	const [description, setDescription] = useState("");
-	const [urlMatch, setUrlMatch] = useState("");
-	const [waitForElement, setWaitForElement] = useState("");
-	const [scriptInterval, setScriptInterval] = useState(null);
-
-	useEffect(() => {
-		if (!script.new) {
-			setName(script.name);
-			setDescription(script.description);
-			setUrlMatch(script.urlMatch);
-			setWaitForElement(script.waitForElement);
-			setScriptInterval(script.scriptInterval);
-		} else {
-			setName("");
-			setDescription("");
-			setUrlMatch("");
-			setWaitForElement("");
-			setScriptInterval(null);
-		}
-	}, [script]);
-
-	return (
-		<Box sx={{ width: "100%" }}>
-			<TextField
-				label="Name"
-				variant="filled"
-				size="small"
-				value={name}
-				onChange={(e) => setName(e.target.value)}
-				fullWidth
-				margin="dense"
-			></TextField>
-			<TextField
-				label="Description"
-				variant="filled"
-				size="small"
-				value={description}
-				onChange={(e) => setDescription(e.target.value)}
-				fullWidth
-				margin="dense"
-			></TextField>
-			<TextField
-				label="Url Match"
-				variant="filled"
-				size="small"
-				value={urlMatch}
-				onChange={(e) => setUrlMatch(e.target.value)}
-				fullWidth
-				margin="dense"
-			></TextField>
-			<TextField
-				label="Wait for element (query selector)"
-				variant="filled"
-				size="small"
-				value={waitForElement}
-				onChange={(e) => setWaitForElement(e.target.value)}
-				fullWidth
-				margin="dense"
-			></TextField>
-			<TextField
-				label="Interval (0 or empty for no interval)"
-				variant="filled"
-				size="small"
-				value={scriptInterval}
-				onChange={(e) => setScriptInterval(e.target.value)}
-				fullWidth
-				margin="dense"
-			></TextField>
-			<div className={buttonsContainer}>
+			<Box component="span" sx={{ p: 2 }}>
+				<Button onClick={() => setMetadataDrawerOpen(true)}>
+					Script Settings
+				</Button>
+			</Box>
+			<Box component="span" sx={{ p: 2 }}>
 				<Button
 					variant="contained"
 					size="small"
@@ -157,16 +102,104 @@ const Metadata = ({ script, onSave, onDelete }) => {
 				>
 					Delete
 				</Button>
+			</Box>
+			<Box component="span" sx={{ p: 2 }}>
 				<Button
 					variant="contained"
 					size="small"
 					onClick={() =>
-						onSave(name, description, urlMatch, waitForElement, scriptInterval)
+						onSaveClick(
+							name,
+							description,
+							urlMatch,
+							waitForElement,
+							scriptInterval
+						)
 					}
 				>
 					Save
 				</Button>
-			</div>
+			</Box>
+			<Drawer
+				anchor="bottom"
+				open={metadataDrawerOpen}
+				onClose={() => setMetadataDrawerOpen(false)}
+			>
+				<Box sx={{ p: 2 }}>
+					<Box sx={{ width: "100%" }}>
+						<TextField
+							label="Name"
+							variant="filled"
+							size="small"
+							value={name}
+							onChange={(e) => setName(e.target.value)}
+							fullWidth
+							margin="dense"
+						></TextField>
+						<TextField
+							label="Description"
+							variant="filled"
+							size="small"
+							value={description}
+							onChange={(e) => setDescription(e.target.value)}
+							fullWidth
+							margin="dense"
+						></TextField>
+						<TextField
+							label="Url Match"
+							variant="filled"
+							size="small"
+							value={urlMatch}
+							onChange={(e) => setUrlMatch(e.target.value)}
+							fullWidth
+							margin="dense"
+						></TextField>
+						<TextField
+							label="Wait for element (query selector)"
+							variant="filled"
+							size="small"
+							value={waitForElement}
+							onChange={(e) => setWaitForElement(e.target.value)}
+							fullWidth
+							margin="dense"
+						></TextField>
+						<TextField
+							label="Interval (0 or empty for no interval)"
+							variant="filled"
+							size="small"
+							value={scriptInterval}
+							onChange={(e) => setScriptInterval(e.target.value)}
+							fullWidth
+							margin="dense"
+						></TextField>
+						<div className={buttonsContainer}>
+							<Button
+								variant="contained"
+								size="small"
+								disabled={script.new}
+								onClick={() => onDelete(script)}
+							>
+								Delete
+							</Button>
+							<Button
+								variant="contained"
+								size="small"
+								onClick={() =>
+									onSaveClick(
+										name,
+										description,
+										urlMatch,
+										waitForElement,
+										scriptInterval
+									)
+								}
+							>
+								Save
+							</Button>
+						</div>
+					</Box>
+				</Box>
+			</Drawer>
 		</Box>
 	);
 };

@@ -37,20 +37,14 @@ const ScriptsSidebar = ({
 					onChange={(e) => setSearchText(e.target.value)}
 				/>
 			</Box>
-			<Box sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
-				<Button
-					variant="contained"
-					size="small"
-					onClick={() =>
-						onSelect({
-							new: true,
-							enabled: false,
-							id: 0,
-						})
-					}
-				>
-					Create Script
-				</Button>
+			<Box
+				sx={{
+					width: "100%",
+					maxWidth: 360,
+					maxHeight: 564,
+					bgcolor: "background.paper",
+				}}
+			>
 				<List>
 					{scripts
 						.filter((current) => current.name.includes(searchText))
@@ -65,6 +59,19 @@ const ScriptsSidebar = ({
 						))}
 				</List>
 			</Box>
+			<Button
+				variant="contained"
+				size="small"
+				onClick={() =>
+					onSelect({
+						new: true,
+						enabled: false,
+						id: 0,
+					})
+				}
+			>
+				Create Script
+			</Button>
 		</Box>
 	);
 };

@@ -10,7 +10,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
-import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
 
 import "ace-builds/src-noconflict/mode-java";
 import "ace-builds/src-noconflict/theme-monokai";
@@ -33,7 +33,7 @@ const ScriptsSidebar = ({ script, onSave, onDelete }) => {
 			setWaitForElement(script.waitForElement);
 			setScriptInterval(script.scriptInterval);
 		} else {
-			setName("");
+			setName(script.name || "");
 			setDescription("");
 			setUrlMatch("");
 			setWaitForElement("");
@@ -88,6 +88,11 @@ const ScriptsSidebar = ({ script, onSave, onDelete }) => {
 					tabSize: 2,
 				}}
 			/>
+			<Box component="span" sx={{ p: 2 }}>
+				<Typography variant="subtitle1" gutterBottom component="span">
+					{script.name}
+				</Typography>
+			</Box>
 			<Box component="span" sx={{ p: 2 }}>
 				<Button onClick={() => setMetadataDrawerOpen(true)}>
 					Script Settings

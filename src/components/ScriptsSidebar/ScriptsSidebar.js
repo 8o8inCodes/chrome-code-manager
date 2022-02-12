@@ -41,8 +41,9 @@ const ScriptsSidebar = ({
 				sx={{
 					width: "100%",
 					maxWidth: 360,
-					maxHeight: 564,
+					maxHeight: "486px",
 					bgcolor: "background.paper",
+					overflowY: "auto",
 				}}
 			>
 				<List>
@@ -65,6 +66,10 @@ const ScriptsSidebar = ({
 				onClick={() =>
 					onSelect({
 						new: true,
+						name:
+							scripts.length > 0
+								? `new-script-${scripts.length + 1}`
+								: "new-script",
 						enabled: false,
 						id: 0,
 					})

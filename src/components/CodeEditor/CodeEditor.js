@@ -11,11 +11,12 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import Typography from "@mui/material/Typography";
+import Stack from "@mui/material/Stack";
 
 import "ace-builds/src-noconflict/mode-java";
 import "ace-builds/src-noconflict/theme-monokai";
 
-const ScriptsSidebar = ({ script, onSave, onDelete }) => {
+const ScriptsSidebar = ({ script, onSave, onDelete, setDirty, dirty }) => {
 	const [code, setCode] = useState("");
 
 	const [metadataDrawerOpen, setMetadataDrawerOpen] = useState(false);
@@ -65,6 +66,7 @@ const ScriptsSidebar = ({ script, onSave, onDelete }) => {
 			scriptInterval,
 			code,
 		});
+		setDirty(false);
 	};
 	return (
 		<Box sx={{ height: "564px", width: "100%" }}>
@@ -72,7 +74,10 @@ const ScriptsSidebar = ({ script, onSave, onDelete }) => {
 				placeholder="Code"
 				mode="javascript"
 				theme="monokai"
-				onChange={setCode}
+				onChange={(c) => {
+					setDirty(true);
+					setCode(c);
+				}}
 				fontSize={14}
 				showPrintMargin={true}
 				showGutter={true}
@@ -88,28 +93,29 @@ const ScriptsSidebar = ({ script, onSave, onDelete }) => {
 					tabSize: 2,
 				}}
 			/>
-			<Box component="span" sx={{ p: 2 }}>
-				<Typography variant="subtitle1" gutterBottom component="span">
+			<Stack direction="row" justifyContent="end" alignItems="center">
+				<Typography
+					variant="subtitle1"
+					gutterBottom
+					component="span"
+					sx={{ ml: 2 }}
+				>
 					{script.name}
 				</Typography>
-			</Box>
-			<Box component="span" sx={{ p: 2 }}>
-				<Button onClick={() => setMetadataDrawerOpen(true)}>
+				<Button onClick={() => setMetadataDrawerOpen(true)} sx={{ ml: 2 }}>
 					Script Settings
 				</Button>
-			</Box>
-			<Box component="span" sx={{ p: 2 }}>
 				<Button
 					variant="contained"
 					size="small"
 					disabled={script.new}
 					onClick={() => onDelete(script)}
+					sx={{ ml: 2 }}
 				>
 					Delete
 				</Button>
-			</Box>
-			<Box component="span" sx={{ p: 2 }}>
 				<Button
+					disabled={!dirty}
 					variant="contained"
 					size="small"
 					onClick={() =>
@@ -121,10 +127,11 @@ const ScriptsSidebar = ({ script, onSave, onDelete }) => {
 							scriptInterval
 						)
 					}
+					sx={{ ml: 2 }}
 				>
 					Save
 				</Button>
-			</Box>
+			</Stack>
 			<Drawer
 				anchor="bottom"
 				open={metadataDrawerOpen}
@@ -137,7 +144,10 @@ const ScriptsSidebar = ({ script, onSave, onDelete }) => {
 							variant="filled"
 							size="small"
 							value={name}
-							onChange={(e) => setName(e.target.value)}
+							onChange={(e) => {
+								setDirty(true);
+								setName(e.target.value);
+							}}
 							fullWidth
 							margin="dense"
 						></TextField>
@@ -146,7 +156,10 @@ const ScriptsSidebar = ({ script, onSave, onDelete }) => {
 							variant="filled"
 							size="small"
 							value={description}
-							onChange={(e) => setDescription(e.target.value)}
+							onChange={(e) => {
+								setDirty(true);
+								setDescription(e.target.value);
+							}}
 							fullWidth
 							margin="dense"
 						></TextField>
@@ -155,7 +168,10 @@ const ScriptsSidebar = ({ script, onSave, onDelete }) => {
 							variant="filled"
 							size="small"
 							value={urlMatch}
-							onChange={(e) => setUrlMatch(e.target.value)}
+							onChange={(e) => {
+								setDirty(true);
+								setUrlMatch(e.target.value);
+							}}
 							fullWidth
 							margin="dense"
 						></TextField>
@@ -164,7 +180,10 @@ const ScriptsSidebar = ({ script, onSave, onDelete }) => {
 							variant="filled"
 							size="small"
 							value={waitForElement}
-							onChange={(e) => setWaitForElement(e.target.value)}
+							onChange={(e) => {
+								setDirty(true);
+								setWaitForElement(e.target.value);
+							}}
 							fullWidth
 							margin="dense"
 						></TextField>
@@ -173,7 +192,10 @@ const ScriptsSidebar = ({ script, onSave, onDelete }) => {
 							variant="filled"
 							size="small"
 							value={scriptInterval}
-							onChange={(e) => setScriptInterval(e.target.value)}
+							onChange={(e) => {
+								setDirty(true);
+								setScriptInterval(e.target.value);
+							}}
 							fullWidth
 							margin="dense"
 						></TextField>
@@ -187,17 +209,19 @@ const ScriptsSidebar = ({ script, onSave, onDelete }) => {
 								Delete
 							</Button>
 							<Button
+								disabled={!dirty}
 								variant="contained"
 								size="small"
-								onClick={() =>
+								onClick={() => {
 									onSaveClick(
 										name,
 										description,
 										urlMatch,
 										waitForElement,
 										scriptInterval
-									)
-								}
+									);
+									setMetadataDrawerOpen(false);
+								}}
 							>
 								Save
 							</Button>

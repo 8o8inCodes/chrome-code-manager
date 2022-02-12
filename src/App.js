@@ -57,7 +57,7 @@ const App = () => {
 			setSelectedScript(script);
 		} else {
 			openConfirmationModal(
-				"Your current script is not saved. Are you sure you want to switch to another script?",
+				"Your current script is not saved. Are you sure you want to switch to another script without saving?",
 				"Warning",
 				() => {
 					setSelectedScript(script);

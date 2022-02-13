@@ -52,8 +52,8 @@ const App = () => {
 		}
 	}, []);
 
-	const onSelect = (script) => {
-		if (!dirty) {
+	const onSelect = (script, noPrompt = false) => {
+		if (!dirty || noPrompt) {
 			setSelectedScript(script);
 		} else {
 			openConfirmationModal(
@@ -68,9 +68,6 @@ const App = () => {
 	};
 
 	const onSave = (script) => {
-		// check if scripts already containing a script with the same ID, if it does, override it,
-		// otherwise push it. And set "new" attribute to false. and update the chrome store
-		console.log("on Save");
 		let updatedScripts = [];
 		if (!script.new) {
 			const scriptIndex = scripts.findIndex((s) => s.id === script.id);
@@ -79,17 +76,17 @@ const App = () => {
 				script,
 				...scripts.slice(scriptIndex + 1, scripts.length),
 			];
+			updateScripts(updatedScripts, setScripts);
 		} else {
-			updatedScripts = [
-				{
-					...script,
-					new: false,
-					id: nanoid(),
-				},
-				...scripts,
-			];
+			const newScript = {
+				...script,
+				new: false,
+				id: nanoid(),
+			};
+			updatedScripts = [newScript, ...scripts];
+			updateScripts(updatedScripts, setScripts);
+			onSelect(newScript, true);
 		}
-		updateScripts(updatedScripts, setScripts);
 	};
 
 	const onDelete = (script) => {

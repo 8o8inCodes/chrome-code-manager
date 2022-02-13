@@ -109,6 +109,7 @@ const ScriptsSidebar = ({ script, onSave, onDelete, setDirty, dirty }) => {
 					variant="contained"
 					size="small"
 					disabled={script.new}
+					color="error"
 					onClick={() => onDelete(script)}
 					sx={{ ml: 2 }}
 				>
@@ -203,8 +204,18 @@ const ScriptsSidebar = ({ script, onSave, onDelete, setDirty, dirty }) => {
 							<Button
 								variant="contained"
 								size="small"
+								onClick={() => setMetadataDrawerOpen(false)}
+								sx={{ mr: 2 }}
+							>
+								Close
+							</Button>
+							<Button
+								variant="contained"
+								size="small"
 								disabled={script.new}
 								onClick={() => onDelete(script)}
+								color="error"
+								sx={{ mr: 2 }}
 							>
 								Delete
 							</Button>
@@ -222,6 +233,7 @@ const ScriptsSidebar = ({ script, onSave, onDelete, setDirty, dirty }) => {
 									);
 									setMetadataDrawerOpen(false);
 								}}
+								sx={{ mr: 2 }}
 							>
 								Save
 							</Button>

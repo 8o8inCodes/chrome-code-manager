@@ -1,27 +1,29 @@
 .app {
   text-align: center;
-  width: 500px;
-  /* height: 538px; */
+  width: 800px;
+  height: 600px;
   display: flex;
   background: #0e0e0e;
+  color: white;
+  overflow : hidden;
 }
 
-input {
+/* input {
   background: #272822;
   border: solid 1px #585858;
   padding: 5px;
   margin-top: 3px;
   border-radius: 5px;
   color: white;
-}
-button, .divButton {
+} */
+/* button, .divButton {
   background: #272822;
   border: solid 1px #585858;
   padding: 5px;
   margin-top: 3px;
   border-radius: 5px;
   color: white;
-}
+} */
 
 /* width */
 ::-webkit-scrollbar {
